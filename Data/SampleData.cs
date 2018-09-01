@@ -1,12 +1,18 @@
 ﻿using Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Data
 {
     public static class SampleData
     {
-        public static List<Person> GetSamplePeople()
+        public static List<Person> GetPeople()
+        {
+            return GetSamplePeople();
+        }
+
+        private static List<Person> GetSamplePeople()
         {
             var people = new List<Person>();
 
@@ -35,6 +41,53 @@ namespace Data
             });
 
             return people;
+        }
+
+        private static List<Score> GetSampleScores(int personId)
+        {
+            var scores = new List<Score>();
+
+            scores.Add(new Score
+            {
+                Id = 0,
+                PersonId = personId,
+                Name = "Level 1",
+                Value = 500
+            });
+
+            scores.Add(new Score
+            {
+                Id = 1,
+                PersonId = personId,
+                Name = "Level 1",
+                Value = 650
+            });
+
+            return scores;
+        }
+
+        public static Person GetPersonById(int id)
+        {
+            var people = GetSamplePeople();
+
+            return people.FirstOrDefault(p => p.Id == id);
+        }
+
+        public static void InsertPerson(Person person)
+        {
+            person.Id = -1;
+        }
+
+        public static Score GetScoreById(int personId, int id)
+        {
+            var scores = GetSampleScores(personId);
+
+            return scores.FirstOrDefault(s => s.Id == id);
+        }
+
+        public static void InsertScore(Score score)
+        {
+            score.Id = -1;
         }
     }
 }

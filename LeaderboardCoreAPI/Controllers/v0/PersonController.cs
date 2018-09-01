@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Data;
-using Microsoft.AspNetCore.Http;
+﻿using Data;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using System.Collections.Generic;
 
 namespace LeaderboardCoreAPI.Controllers.v0
 {
@@ -17,7 +13,7 @@ namespace LeaderboardCoreAPI.Controllers.v0
         [HttpGet]
         public IEnumerable<Person> GetAllPeople()
         {
-            var people = SampleData.GetSamplePeople();
+            var people = SampleData.GetPeople();
 
             return people;
         }
@@ -26,8 +22,21 @@ namespace LeaderboardCoreAPI.Controllers.v0
         [HttpPost]
         public IActionResult Post([FromBody]Person person)
         {
+            
 
-            return Ok();
+            return CreatedAtRoute($"api/v0/person/{person.Id}", person);
+        }
+
+        [Route("{id:int}")]
+        [HttpGet]
+        public IActionResult GetPerson(int id)
+        {
+            var person = SampleData.GetPersonById(id);
+
+            if (person == null)
+                return NotFound();
+
+            return Ok(person);
         }
     }
 }
