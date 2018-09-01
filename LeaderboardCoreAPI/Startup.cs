@@ -25,11 +25,11 @@ namespace LeaderboardCoreAPI
         {
             services.AddMvc();
 
-            //var connection = Configuration.GetConnectionString("LeaderboardDatabase");
+            var connection = Configuration.GetConnectionString("LeaderboardDatabase");
 
-            //services.AddDbContext<LeaderboardContext>(options =>
-            //    options.UseSqlServer(connection)
-            //    .EnableSensitiveDataLogging());
+            services.AddDbContext<LeaderboardContext>(options =>
+                options.UseSqlServer(connection)
+                .EnableSensitiveDataLogging());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
