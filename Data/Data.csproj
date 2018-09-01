@@ -2,10 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+	<GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>

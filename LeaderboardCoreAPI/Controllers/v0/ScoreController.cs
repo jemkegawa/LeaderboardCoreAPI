@@ -20,13 +20,13 @@ namespace LeaderboardCoreAPI.Controllers.v0
             return Ok(score);
         }
 
-        [Route("")]
+        [Route("{personId:int}")]
         [HttpPost]
-        public IActionResult PostScore([FromBody]Score score)
+        public IActionResult PostScore(int personId, [FromBody]Score score)
         {
-            SampleData.InsertScore(score);
+            SampleData.InsertScore(personId, score);
 
-            return CreatedAtRoute($"api/v0/score/{score.Id}", score);
+            return CreatedAtRoute($"api/v0/score/{personId}/{score.Id}", score);
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models
 {
     public class Score
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int PersonId { get; set; }
         public string Name { get; set; }
         public int Value { get; set; }
     }

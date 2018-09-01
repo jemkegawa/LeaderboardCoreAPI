@@ -50,7 +50,6 @@ namespace Data
             scores.Add(new Score
             {
                 Id = 0,
-                PersonId = personId,
                 Name = "Level 1",
                 Value = 500
             });
@@ -58,9 +57,15 @@ namespace Data
             scores.Add(new Score
             {
                 Id = 1,
-                PersonId = personId,
                 Name = "Level 1",
                 Value = 650
+            });
+
+            scores.Add(new Score
+            {
+                Id = 2,
+                Name = "Level 2",
+                Value = 312
             });
 
             return scores;
@@ -85,7 +90,7 @@ namespace Data
             return scores.FirstOrDefault(s => s.Id == id);
         }
 
-        public static void InsertScore(Score score)
+        public static void InsertScore(int personId, Score score)
         {
             score.Id = -1;
         }

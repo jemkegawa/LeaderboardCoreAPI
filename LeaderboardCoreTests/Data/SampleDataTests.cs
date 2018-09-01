@@ -13,7 +13,7 @@ namespace LeaderboardCoreTests
         {
             var expected = SetupSamplePeople();
 
-            var actual = SampleData.GetSamplePeople();
+            var actual = SampleData.GetPeople();
 
             Assert.Equal(expected.Count, actual.Count);
         }

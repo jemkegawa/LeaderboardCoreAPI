@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Data.DataContext;
+using LeaderboardCoreAPI.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace LeaderboardCoreAPI
 {
@@ -24,12 +23,13 @@ namespace LeaderboardCoreAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration.GetConnectionString("LeaderboardDatabase");
-            //services.AddDbContext<leaderboardContext>(options =>
+            services.AddMvc();
+
+            //var connection = Configuration.GetConnectionString("LeaderboardDatabase");
+
+            //services.AddDbContext<LeaderboardContext>(options =>
             //    options.UseSqlServer(connection)
             //    .EnableSensitiveDataLogging());
-
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +39,10 @@ namespace LeaderboardCoreAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var username = Configuration.GetSection("Authentication").GetValue<string>("username");
+            var password = Configuration.GetSection("Authentication").GetValue<string>("password");
+            app.UseMiddleware<AuthenticationMiddleware>(username, password);
 
             app.UseMvc();
         }
