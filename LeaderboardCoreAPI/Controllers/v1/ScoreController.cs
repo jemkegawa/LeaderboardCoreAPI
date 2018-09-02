@@ -3,6 +3,7 @@ using Data.DAL;
 using Data.DataContext;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using System.Linq;
 
 namespace LeaderboardCoreAPI.Controllers.v0
 {
@@ -49,6 +50,30 @@ namespace LeaderboardCoreAPI.Controllers.v0
                 routeValues: new { id = score.Id, personId = score.PersonId },
                 value: score
                 );
+        }
+
+        [Route("highscores/{numResults:int}")]
+        [HttpGet]
+        public IActionResult GetTopScores(int numResults)
+        {
+            var highscores = scoreDAL.GetHighScores(numResults);
+
+            if (highscores == null)
+                return NotFound();
+
+            return Ok(highscores);
+        }
+
+        [Route("highscores/{numResults:int}/{startPosition:int}")]
+        [HttpGet]
+        public IActionResult GetPeopleAtPosition(int numResults, int startPosition)
+        {
+            var highscores = scoreDAL.GetHighScores(numResults, startPosition);
+
+            if (highscores == null)
+                return NotFound();
+
+            return Ok(highscores);
         }
     }
 }

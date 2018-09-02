@@ -14,5 +14,6 @@ namespace Models
         public int Value { get; set; }
         [Required]
         public int PersonId { get; set; }
+        public Person Person { get; set; }
     }
 }
